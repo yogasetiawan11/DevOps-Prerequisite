@@ -24,11 +24,23 @@ Run dependency check
 Once this is done. it will store the output into``.html``
 
 
+# Run OWASP command from jenkins
+Go to Jenkins >> Manage Jenkins >> Plugins >>
 
-```bash
 
+<img width="1335" height="637" alt="Image" src="https://github.com/user-attachments/assets/aeb0f56a-c3a3-47d1-90f1-cd74004667ce" />
+
+Then run OWASP script in the pipeline 
+```sh
+    stages {
+        stage('OWASP Dependency-check') {
+            steps {
+                dependencyCheck additionalArguments:'-scan target/', odcInstallation 'owasp'
+                     dependencyCheckPublisher pattern: '**/dependency-check-report-pom.xml'    
+            }
+        
+    }
 ```
 
-```bash
-
-```
+- Configure Jenkins Globally
+Go to Jenkins >> Manage Jenkins >> Tools >> click "Add Dependency-Check" >> Make sure you fill the same name of "odcInstallation".

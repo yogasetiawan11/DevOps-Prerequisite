@@ -1,7 +1,0 @@
-# Use owasp with Jenkins
-```bash
-# Go to jenkins 
-# Go to plugins
-# Search for OWASP Dependency-Check then install
-
-```

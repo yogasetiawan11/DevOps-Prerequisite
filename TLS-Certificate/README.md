@@ -40,5 +40,5 @@ inside the output there's a **``Run certbot twice daily``** this is a cronjob th
 
 always renew your certificate automatically with this command
 ```sh
-sudo certbot renew --dry-run
+sudo certbot renew --dry-run 
 ```

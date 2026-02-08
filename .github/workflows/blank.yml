@@ -1,18 +1,47 @@
 name: CI
 
-on: ["pull", "push"]
-
-  # Allows you to run this workflow manually from the Actions tab
+on:
+  push:
+  pull_request:
   workflow_dispatch:
 
 jobs:
   security:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      # 🔐 Pin Node version (CRITICAL for your app)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 14
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+
+      # 🔎 Secret scanning
       - name: Run Gitleaks
-        # Gitleaks configuration
-      - name: Run OWASP Scanning
-        # OWASP configuration
-      - name: Run Trivy Scanning
-        # Trivy configuration
+        uses: gitleaks/gitleaks-action@v2
+        with:
+          fail: true
+
+      # 🧪 Dependency vulnerability scan
+      - name: Run OWASP Dependency-Check
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: "netflix-clone"
+          path: "."
+          format: "HTML"
+          out: "reports"
+
+      # 🐳 Filesystem vulnerability scan
+      - name: Run Trivy FS scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          scan-ref: .
+          severity: HIGH,CRITICAL

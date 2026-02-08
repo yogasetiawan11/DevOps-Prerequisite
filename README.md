@@ -89,3 +89,10 @@ For developers setting up their environment:
 2. Set up Gitleaks pre-commit hooks
 3. Install OWASP scanning tools
 4. Configure TLS certificates for local HTTPS testing
+
+## Support and Resources
+- [Gitleaks GitHub Repository](https://github.com/zricethezav/gitleaks)
+- [Maven Official Website](https://maven.apache.org/)
+- [Nexus Sonatype Documentation](https://help.sonatype.com/)
+- [OWASP Official Website](https://owasp.org/)
+- [Trivy GitHub Repository](https://github.com/aquasecurity/trivy)

@@ -1,0 +1,16 @@
+services:
+  nexus:
+    # navigate to https://hub.docker.com/r/sonatype/nexus3/ to find the latest version of nexus3 and update the version number in the image tag below
+    image: sonatype/nexus3:3.77.0
+    container_name: nexus
+    ports:
+      - "8081:8081"
+      - "8085:8085" # This port is used for our own docker hub
+    volumes:
+      - nexus-data:/nexus-data
+    restart: unless-stopped
+
+volumes:
+  nexus-data:
+
+# Run ( docker-compose up -d ) to start the container and then navigate to http://localhost:8081 to access the Nexus Repository Manager UI. The default credentials are admin/admin123. After logging in, you can change the password and configure your repositories as needed.
